@@ -1,5 +1,4 @@
 steps:
-# Build image
 - name: 'gcr.io/cloud-builders/docker'
   args: [
     'build',
@@ -8,17 +7,18 @@ steps:
     '.'
   ]
 
-# Push image
 - name: 'gcr.io/cloud-builders/docker'
   args: [
     'push',
     'us-central1-docker.pkg.dev/project-2f5b3e28-ac7e-4407-938/shopeasy-repo/shopeasy-app:v2'
   ]
 
-# Deploy to GKE ✅ (IMPORTANT)
 - name: 'gcr.io/cloud-builders/kubectl'
   args:
   - set
   - image
   - deployment/shopeasy-app
   - shopeasy=us-central1-docker.pkg.dev/project-2f5b3e28-ac7e-4407-938/shopeasy-repo/shopeasy-app:v2
+
+options:
+  logging: CLOUD_LOGGING_ONLY
