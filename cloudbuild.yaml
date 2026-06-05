@@ -1,0 +1,7 @@
+yaml
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/PROJECT-ID/shopeasy-repo/shopeasy:v1', '.']
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'us-central1-docker.pkg.dev/PROJECT-ID/shopeasy-repo/shopeasy:v1']
