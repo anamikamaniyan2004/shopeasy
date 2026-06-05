@@ -1,21 +1,18 @@
 steps:
-# Build image
 - name: 'gcr.io/cloud-builders/docker'
   args: [
     'build',
     '-t',
-    'us-central1-docker.pkg.dev/project-2f5b3e28-ac7e-4407-938/shopeasy-repo/shopeasy-app:v2',
+    'us-central1-docker.pkg.dev/project-2f5b3e28-ac7e-4407-938/shopeasy-repo/shopeasy-app:latest',
     '.'
   ]
 
-# Push image
 - name: 'gcr.io/cloud-builders/docker'
   args: [
     'push',
-    'us-central1-docker.pkg.dev/project-2f5b3e28-ac7e-4407-938/shopeasy-repo/shopeasy-app:v2'
+    'us-central1-docker.pkg.dev/project-2f5b3e28-ac7e-4407-938/shopeasy-repo/shopeasy-app:latest'
   ]
 
-# Deploy (FIXED ✅)
 - name: 'gcr.io/cloud-builders/kubectl'
   env:
   - 'CLOUDSDK_CONTAINER_CLUSTER=shopeasy-cluster'
@@ -24,11 +21,7 @@ steps:
   - set
   - image
   - deployment/shopeasy-app
-  - shopeasy=us-central1-docker.pkg.dev/project-2f5b3e28-ac7e-4407-938/shopeasy-repo/shopeasy-app:v2
+  - shopeasy=us-central1-docker.pkg.dev/project-2f5b3e28-ac7e-4407-938/shopeasy-repo/shopeasy-app:latest
 
 options:
   logging: CLOUD_LOGGING_ONLY
-
-# add this line at top
-# updated config
-
